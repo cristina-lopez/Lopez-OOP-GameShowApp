@@ -7,11 +7,14 @@
 /** 
  * Listens for click on `#btn_reset` and calls startGame() on game object
  */
- //document.getElementById('btn_reset').addEventListener('click', function(){
-    //game.startGame();
+let game; 
+const resetButton = document.getElementById('btn__reset');
+resetButton.addEventListener('click', function() {
+    game = new Game();
+    game.startGame();
     //this.style.display = 'none';
     //document.getElementById('play-area').style.opacity = '1';
-//});
+});
 
 /** 
  * Listen for keyboard presses
