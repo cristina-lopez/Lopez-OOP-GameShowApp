@@ -20,7 +20,7 @@ class Game {
     startGame() {
         document.getElementById('overlay').style.display = "none";
         const randomPhrase = game.getRandomPhrase();
-        this.activePhrase = new Phrase(randomPhrase.phrase);
+        this.activePhrase = randomPhrase;
         this.activePhrase.addPhraseToDisplay();
     };
 
@@ -105,7 +105,8 @@ class Game {
         document.getElementById('overlay').style.display = "";
         if (gameWon) {
             document.getElementById('game-over-message').textContent = "You win!";
-            document.getElementById('overlay').classList.remove('start');
+            document.getElementById('overlay').classList.remove('start')
+            document.getElementById('overlay').classList.remove('lose');
             document.getElementById('overlay').classList.add('win');
         } else {
             document.getElementById('game-over-message').textContent = "You lose!";
