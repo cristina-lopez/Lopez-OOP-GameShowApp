@@ -4,9 +4,9 @@
 /* Variables */
 
 :root {
-  --color-win: #78CF82;
-  --color-lose: #D94545;
-  --color-start: #5b85b7;
+  --color-win: #439a4d;
+  --color-lose: #b63e3e;
+  --color-start: #b45bb7;
   --color-neutral: #445069;
   --color-neutral-light: #D2D2D2;
   --color-keys: #37474F;
@@ -111,7 +111,7 @@ button {
 
 .show {
   color: #fff;
-  background-color: #4ac0d5;
+  background-color: #36a847;
   font-size: 20px;
   height: 65px;
   width: 65px;
@@ -131,14 +131,14 @@ button {
 }
 
 .chosen {
-  background: #3a3f58;
+  background: #47888c;
   border-radius: 5px;
   font-size: var(--font-size-medium);
   color: #FFFFFF;
 }
 
 .wrong {
-  background: #f7a964;
+  background: #93433c;
   color: #FFFFFF;
 }
 

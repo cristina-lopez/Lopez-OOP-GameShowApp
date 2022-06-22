@@ -53,6 +53,26 @@ class Game {
     };
 
     /**
+     * Handles keyboard presses
+     * @param (string) string - the value of the button pressed
+     */
+    handleKeypress(letter){
+        let letters = [];
+        if (!letters.includes(letter)) {
+            if (!this.activePhrase.checkLetter(letter)) {
+                letters.push(letter);
+                this.removeLife();
+            } else {
+                letters.push(letter);
+                this.activePhrase.showMatchedLetter(letter);
+                if (this.checkForWin()) {
+                    this.gameOver(true);
+                }
+            }
+        }
+    };
+
+    /**
      * Checks for winning move
      * @return {boolean} True if game has been won, false if game wasn't won
      */
