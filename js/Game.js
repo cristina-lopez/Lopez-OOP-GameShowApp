@@ -31,4 +31,63 @@ class Game {
         this.activePhrase = new Phrase(randomPhrase.phrase);
         this.activePhrase.addPhraseToDisplay();
     };
+
+    /**
+     * 
+     */
+    handleInteraction() {
+
+    };
+
+    /**
+     * Checks for winning move
+     * @return {boolean} True if game has been won, false if game wasn't won
+     */
+    checkForWin() {
+        const brokenPhrase = document.getElementById('phrase').firstElementChild.children;
+        let win;
+        for (let i = 0; i < brokenPhrase.length; i++) {
+            if (brokenPhrase[i].classList.contains("hide")) {
+                win = false;
+            } else {
+                win = true;
+            }
+        }
+        return win;
+    };
+
+    /**
+     * Increases the value of the missed property
+     * Removes a life from the scoreboard
+     * Checks if player has remaining lives and ends game if player is out
+     */
+    /// DOESNT WORK
+    removeLife() {
+        for (let i = 0; i < 5; i++) {
+            if (this.missed < 5) {
+                let tries = document.getElementById('scoreboard').firstElementChild.children[i];
+                tries.src = 'images/lostHeart.png';
+                this.missed += 1;
+            } else if (this.missed === 5) {
+                this.gameOver(false);
+            }
+        }
+    };
+
+    /**
+     * Displays game over message
+     * @param {boolean} gameWon - whether or not the user won the game
+     */
+    gameOver(gameWon) {
+        document.getElementById('overlay').style.display = "";
+        if (gameWon) {
+            document.getElementById('game-over-message').textContent = "You win!";
+            document.getElementById('overlay').classList.remove('start');
+            document.getElementById('overlay').classList.add('win');
+        } else {
+            document.getElementById('game-over-message').textContent = "You lose!";
+            document.getElementById('overlay').classList.remove('start');
+            document.getElementById('overlay').classList.add('lose');
+        }
+    };
 }

@@ -8,7 +8,7 @@ class Phrase {
     }
 
     /**
-     * Display phrase on game board
+     * Displays phrase on game board
      */
     addPhraseToDisplay() {
         const div = document.getElementById('phrase').firstElementChild;
@@ -21,5 +21,28 @@ class Phrase {
                 div.insertAdjacentHTML("beforeend", brokenSpace);
             }
         }
-    }
+    };
+
+    /**
+     * Checks if passed letter is in phrase
+     * @param (string) letter - letter to check
+     */
+    checkLetter(letter) {
+        return (this.phrase.includes(letter));
+    };
+
+    /**
+     * Displays passed letter on screen after a match is found
+     * @param (string) letter - letter to display
+     */
+    showMatchedLetter(letter) {
+        const brokenPhrase = document.getElementById('phrase').firstElementChild.children;
+            for (let i = 0; i < brokenPhrase.length; i++) {
+                if (brokenPhrase[i].textContent.includes(letter)) {
+                    document.getElementById('phrase').firstElementChild.children[i].classList.remove('hide');
+                    document.getElementById('phrase').firstElementChild.children[i].classList.add('show');
+                }
+            }
+    };
+
 }
