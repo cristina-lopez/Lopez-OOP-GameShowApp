@@ -10,8 +10,6 @@ const resetButton = document.getElementById('btn__reset');
 resetButton.addEventListener('click', function() {
     game = new Game();
     game.startGame();
-    //this.style.display = 'none';
-    //document.getElementById('play-area').style.opacity = '1';
 });
 
 /**
@@ -23,14 +21,3 @@ button.addEventListener('click', (e) => {
         game.handleInteraction(e.target);
     }
 });
-
-/**
- * Listens for click on 
- */
-
-/** 
- * Listen for keyboard presses
- */
-//document.addEventListener('keydown', function(event){
-    //game.handleKeydown(event);
-//});
