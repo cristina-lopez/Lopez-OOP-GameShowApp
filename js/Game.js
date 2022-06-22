@@ -33,10 +33,22 @@ class Game {
     };
 
     /**
-     * 
+     * Handles onscreen keyboard button clicks
+     * @param (HTMLButtonElement) button - the clicked button element
      */
-    handleInteraction() {
-
+    handleInteraction(button) {
+        button.disabled = true;
+        let buttonPressed = button.textContent;
+        if (!this.activePhrase.checkLetter(buttonPressed)) {
+            button.classList.add('wrong');
+            this.removeLife();
+        } else {
+            button.classList.add('chosen');
+            this.activePhrase.showMatchedLetter(buttonPressed);
+            if (this.checkForWin()) {
+                this.gameOver(true);
+            }
+        }
     };
 
     /**
@@ -44,16 +56,9 @@ class Game {
      * @return {boolean} True if game has been won, false if game wasn't won
      */
     checkForWin() {
-        const brokenPhrase = document.getElementById('phrase').firstElementChild.children;
-        let win;
-        for (let i = 0; i < brokenPhrase.length; i++) {
-            if (brokenPhrase[i].classList.contains("hide")) {
-                win = false;
-            } else {
-                win = true;
-            }
-        }
-        return win;
+        const phraseCount = document.getElementsByClassName('letter').length;
+        const letterCount = document.getElementsByClassName('show').length;
+        return phraseCount === letterCount;
     };
 
     /**
@@ -61,17 +66,14 @@ class Game {
      * Removes a life from the scoreboard
      * Checks if player has remaining lives and ends game if player is out
      */
-    /// DOESNT WORK
     removeLife() {
-        for (let i = 0; i < 5; i++) {
-            if (this.missed < 5) {
-                let tries = document.getElementById('scoreboard').firstElementChild.children[i];
+            if (this.missed < 4) {
+                let tries = document.getElementById('scoreboard').firstElementChild.children[this.missed].firstChild;
                 tries.src = 'images/lostHeart.png';
                 this.missed += 1;
-            } else if (this.missed === 5) {
+            } else if (this.missed === 4) {
                 this.gameOver(false);
             }
-        }
     };
 
     /**
@@ -88,6 +90,47 @@ class Game {
             document.getElementById('game-over-message').textContent = "You lose!";
             document.getElementById('overlay').classList.remove('start');
             document.getElementById('overlay').classList.add('lose');
+        }
+        game.resetGame();
+    };
+
+    /**
+     * method to help reset the game after you win or lose
+     */
+    resetGame() {
+        game.resetPhrase();
+        game.resetQwerty();
+        game.resetHearts();
+    };
+
+    /**
+     * Helper function for resetGame() used to reset the phrase on the screen
+     */
+    resetPhrase() {
+        let phraseDiv = document.getElementById('phrase');
+        phraseDiv.innerHTML = `<ul></ul>`;
+    };
+
+    /**
+     * Helper function for resetGame() used to reset the screen keyboard
+     */
+    resetQwerty() {
+        let qwertybuttons = document.getElementsByClassName("key");
+        for (let i = 0; i < qwertybuttons.length; i++) {
+            qwertybuttons[i].disabled = false;
+            qwertybuttons[i].classList.remove("wrong");
+            qwertybuttons[i].classList.remove("chosen");
+            qwertybuttons[i].classList.add("key");
+        }
+    };
+
+    /**
+     * Helper function for resetGame() used to reset the lives on the screen
+     */
+    resetHearts() {
+        let hearts = document.getElementById('scoreboard').firstElementChild.children;
+        for (let i = 0; i < hearts.length; i++) {
+            hearts[i].firstChild.src = 'images/liveHeart.png';
         }
     };
 }
