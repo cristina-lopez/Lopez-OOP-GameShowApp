@@ -25,8 +25,19 @@ button.addEventListener('click', (e) => {
 /**
  * Listens for keybaord presses and calls handleKeypress on game object
  */
+ let letters = document.getElementsByClassName('key');
 document.addEventListener('keydown', (e) => {
+    
     if (e.key.match(/[a-z]/i)) {
-        game.handleKeypress(e.key.toLowerCase());
+        for (let i = 0; i < letters.length; i++) {
+            if (letters[i].textContent === e.key.toLowerCase()) {
+                game.handleInteraction(letters[i]);
+            }
+        }
+
+
+
+
+       // game.handleKeypress(e.key.toLowerCase());
     }
 });
