@@ -30,7 +30,7 @@ document.addEventListener('keydown', (e) => {
     
     if (e.key.match(/[a-z]/i)) {
         for (let i = 0; i < letters.length; i++) {
-            if (letters[i].textContent === e.key.toLowerCase()) {
+            if (letters[i].textContent === e.key.toLowerCase() && !(letters[i].className.includes('wrong')) && !(letters[i].className.includes('chosen'))) {
                 game.handleInteraction(letters[i]);
             }
         }
