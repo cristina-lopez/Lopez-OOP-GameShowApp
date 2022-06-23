@@ -53,30 +53,6 @@ class Game {
     };
 
     /**
-     * Handles keyboard presses
-     * @param (string) string - the value of the button pressed
-     */
-    handleKeypress(letter){
-        let letters = document.getElementsByClassName('key');
-        for (let i = 0; i < letters.length; i++) {
-            if (letters[i].textContent === letter) {
-                if (!(letters[i].className.includes('wrong')) && !(letters[i].className.includes('chosen'))) {
-                    if (!this.activePhrase.checkLetter(letter)) {
-                        letters[i].classList.add('wrong');
-                        this.removeLife();
-                    } else {
-                        letters[i].classList.add('chosen');
-                        this.activePhrase.showMatchedLetter(letter);
-                        if (this.checkForWin()) {
-                            this.gameOver(true);
-                        }
-                    }
-                }
-            }
-        }
-    };
-
-    /**
      * Checks for winning move
      * @return {boolean} True if game has been won, false if game wasn't won
      */
@@ -159,4 +135,30 @@ class Game {
             hearts[i].firstChild.src = 'images/liveHeart.png';
         }
     };
+
+    /**
+     * Handles keyboard presses
+     * Function is not used but I am keeping it here because I am proud of it! 
+     * It worked even if it didn't follow the rubric.
+     * @param (string) string - the value of the button pressed
+     */
+    /* handleKeypress(letter){
+        let letters = document.getElementsByClassName('key');
+        for (let i = 0; i < letters.length; i++) {
+            if (letters[i].textContent === letter) {
+                if (!(letters[i].className.includes('wrong')) && !(letters[i].className.includes('chosen'))) {
+                    if (!this.activePhrase.checkLetter(letter)) {
+                        letters[i].classList.add('wrong');
+                        this.removeLife();
+                    } else {
+                        letters[i].classList.add('chosen');
+                        this.activePhrase.showMatchedLetter(letter);
+                        if (this.checkForWin()) {
+                            this.gameOver(true);
+                        }
+                    }
+                }
+            }
+        }
+    }; */
 }
