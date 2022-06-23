@@ -57,16 +57,20 @@ class Game {
      * @param (string) string - the value of the button pressed
      */
     handleKeypress(letter){
-        let letters = [];
-        if (!letters.includes(letter)) {
-            if (!this.activePhrase.checkLetter(letter)) {
-                letters.push(letter);
-                this.removeLife();
-            } else {
-                letters.push(letter);
-                this.activePhrase.showMatchedLetter(letter);
-                if (this.checkForWin()) {
-                    this.gameOver(true);
+        let letters = document.getElementsByClassName('key');
+        for (let i = 0; i < letters.length; i++) {
+            if (letters[i].textContent === letter) {
+                if (!(letters[i].className.includes('wrong')) && !(letters[i].className.includes('chosen'))) {
+                    if (!this.activePhrase.checkLetter(letter)) {
+                        letters[i].classList.add('wrong');
+                        this.removeLife();
+                    } else {
+                        letters[i].classList.add('chosen');
+                        this.activePhrase.showMatchedLetter(letter);
+                        if (this.checkForWin()) {
+                            this.gameOver(true);
+                        }
+                    }
                 }
             }
         }
